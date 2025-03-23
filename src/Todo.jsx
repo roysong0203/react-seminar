@@ -1,12 +1,15 @@
 import './App.css'
 
-function Todo({ todo, deleteTodo, editTodo }) {
+function Todo({ todo, deleteTodo, switchEditMode, editTodo }) {
     return (
-        <div style={{width: "50vw", margin: "1.2em", display: "flex", justifyContent: "flex-end"}}>
+        <div style={{width: "60vw", margin: "1.2em", display: "flex", justifyContent: "space-between"}}>
             <input type="checkbox" id={todo.id}/>
-            <label style={{width: "30vw"}} for={todo.id}>{todo.content}</label>
-            <button onClick={() => deleteTodo(todo)}>Delete</button>
-            <button onClick={() => editTodo(todo)}>Edit</button>
+            {!todo.isEdit && <label style={{width: "40vw"}} for={todo.id}>{todo.content}</label>}
+            {todo.isEdit && <input type="text" value={todo.content} style={{width: "40vw"}}
+             onChange={(e) => editTodo(todo, e.target.value)}/>}
+            <button style={{background: "red"}} onClick={() => deleteTodo(todo)}>Delete</button>
+            {!todo.isEdit && <button style={{background: "green"}} onClick={() => switchEditMode(todo)}>Edit</button>}
+            {todo.isEdit && <button style={{background: "blue"}} onClick={() => switchEditMode(todo)}>End edit</button>}
         </div>
     )
 }

@@ -19,9 +19,9 @@ function App() {
 
   function addTodo(content) {
     if (!content) return
-    setTodos([...todos, { content, id }])
+    setTodos([...todos, { content, id, isEdit: false }])
     setId(id + 1)
-    localStorage.setItem('todos', JSON.stringify([...todos, { content, id}]))
+    localStorage.setItem('todos', JSON.stringify([...todos, { content, id, isEdit: false }]))
     console.log(todos, content, id)
   }
 
@@ -31,8 +31,30 @@ function App() {
     localStorage.setItem('todos', JSON.stringify(todos.filter(todo_ => todo_.id !== todo.id)))
   }
 
-  function editTodo() {
-    console.log('editTodo')
+  function switchEditMode(todo) {
+    setTodos(todos.map(todo_ => {
+      if (todo_.id === todo.id) {
+        todo_.isEdit = !todo_.isEdit
+      }
+      return todo_
+    }))
+  }
+
+  function editTodo (todo, content) {
+    setTodos(todos.map(todo_ => {
+      if (todo_.id === todo.id) {
+        todo_.content = content
+        todo_.isEdit = !todo_.isEdit
+      }
+      return todo_
+    }))
+    localStorage.setItem('todos', JSON.stringify(todos.map(todo_ => {
+      if (todo_.id === todo.id) {
+        todo_.content = content
+        todo_.isEdit = !todo_.isEdit
+      }
+      return todo_
+    })))
   }
 
   return (
@@ -41,7 +63,8 @@ function App() {
       <InputTodo addTodo={addTodo} />
       <div>
         {todos.map((todo, index) => (
-          <Todo key={index} todo={todo} deleteTodo={deleteTodo} />
+          <Todo key={index} todo={todo} deleteTodo={deleteTodo} 
+          switchEditMode={switchEditMode} editTodo={editTodo} />
         ))}
       </div>
     </div>

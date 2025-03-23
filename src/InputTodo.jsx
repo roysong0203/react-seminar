@@ -6,7 +6,8 @@ function InputTodo({ addTodo }) {
 
     return (
         <div style={{margin: "1.2em"}}>
-            <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder="Enter todo"/>
+            <input style={{width: "50vh"}} type="text" value={inputValue} 
+            onChange={(e) => setInputValue(e.target.value)} placeholder="Enter todo"/>
             <button onClick={() => addTodo(inputValue)}>Add Todo</button>
         </div>
     )
