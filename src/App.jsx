@@ -18,6 +18,7 @@ function App() {
   }, [])
 
   function addTodo(content) {
+    if (!content) return
     setTodos([...todos, { content, id }])
     setId(id + 1)
     localStorage.setItem('todos', JSON.stringify([...todos, { content, id}]))
@@ -30,8 +31,12 @@ function App() {
     localStorage.setItem('todos', JSON.stringify(todos.filter(todo_ => todo_.id !== todo.id)))
   }
 
+  function editTodo() {
+    console.log('editTodo')
+  }
+
   return (
-    <>
+    <div style={{display: "flex", flexDirection: "column", justifyContent: "flex-start", height: "100vh"}}>
       <h1>Todo List</h1>
       <InputTodo addTodo={addTodo} />
       <div>
@@ -39,7 +44,7 @@ function App() {
           <Todo key={index} todo={todo} deleteTodo={deleteTodo} />
         ))}
       </div>
-    </>
+    </div>
   )
 }
 
