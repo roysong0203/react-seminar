@@ -3,7 +3,8 @@ import './App.css'
 function Todo({ todo, deleteTodo }) {
     return (
         <div>
-            <p>{todo}</p>
+            <input type="checkbox" id={todo.id}/>
+            <label>{todo.content}</label>
             <button onClick={() => deleteTodo(todo)}>Delete</button>
         </div>
     )

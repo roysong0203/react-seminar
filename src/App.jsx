@@ -5,25 +5,29 @@ import InputTodo from './InputTodo'
 
 function App() {
   
+  const [id, setId] = useState(0)
   const [todos, setTodos] = useState([])
 
   useEffect(() => {
     const todos = localStorage.getItem('todos')
     if (todos) {
-      setTodos(JSON.parse(todos))
+      const savedTodos = JSON.parse(todos)
+      setTodos(savedTodos)
+      setId(savedTodos[savedTodos.length - 1].id + 1)
     }
   }, [])
 
-  function addTodo(todo) {
-    setTodos([...todos, todo])
-    localStorage.setItem('todos', JSON.stringify([...todos, todo]))
-    console.log(todos, todo)
+  function addTodo(content) {
+    setTodos([...todos, { content, id }])
+    setId(id + 1)
+    localStorage.setItem('todos', JSON.stringify([...todos, { content, id}]))
+    console.log(todos, content, id)
   }
 
   function deleteTodo(todo) {
-    console.log(todos.filter(todo_ => todo_ !== todo))
-    setTodos(todos.filter(todo_ => todo_ !== todo))
-    localStorage.setItem('todos', JSON.stringify(todos.filter(todo_ => todo_ !== todo)))
+    console.log(todos.filter(todo_ => todo_.id !== todo.id))
+    setTodos(todos.filter(todo_ => todo_.id !== todo.id))
+    localStorage.setItem('todos', JSON.stringify(todos.filter(todo_ => todo_.id !== todo.id)))
   }
 
   return (
