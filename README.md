@@ -11,7 +11,7 @@
     - 완료하신 후 소스 코드를 GitHub에 업로드 해주세요.
     - GitHub 레포지토리 링크를 댓글로 올려주세요.
 - 참고 자료
-    - [LocalStorage 사용법][https://developer.mozilla.org/ko/docs/Web/API/Window/localStorage]
+    - [LocalStorage 사용법](https://developer.mozilla.org/ko/docs/Web/API/Window/localStorage)
     - 이 과제에서는 React Router가 필요하지 않습니다.
 - 기한
     - **3월 30일 일요일 23시 59분**까지
